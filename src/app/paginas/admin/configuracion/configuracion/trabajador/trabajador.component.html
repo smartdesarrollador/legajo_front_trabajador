@@ -1,0 +1,220 @@
+<!-- src/app/components/trabajador/trabajador.component.html -->
+<div class="container mx-auto p-5" *ngIf="trabajador">
+  <div class="flex w-[90%] mx-auto gap-4">
+    <!-- Sidebar -->
+    <div
+      class="w-1/4 bg-white p-5 rounded-lg shadow-md flex flex-col items-center"
+    >
+      <img
+        [src]="trabajador.resumen.foto"
+        alt="Avatar"
+        class="w-24 h-24 rounded-full mb-4"
+      />
+      <h2 class="text-xl font-bold mb-1">
+        {{ trabajador.resumen.nombres.nombreCompleto }}
+      </h2>
+      <p class="text-sm text-gray-500 mb-5 text-center">
+        {{ trabajador.documentos.cargo.nombre }}
+      </p>
+
+      <ul class="w-full text-center space-y-3">
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Primer Nombre: {{ trabajador.resumen.nombres.primer }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Segundo Nombre: {{ trabajador.resumen.nombres.segundo }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Apellido Paterno: {{ trabajador.resumen.nombres.paterno }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Apellido Materno: {{ trabajador.resumen.nombres.materno }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Tipo Documento:
+          {{ trabajador.documentos.datos_personales.tipoDocumento }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Teléfono Fijo:
+          {{ trabajador.documentos.datos_personales.telefonoFijo }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Celular: {{ trabajador.documentos.datos_personales.celular }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Email: {{ trabajador.documentos.datos_personales.email }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Fecha Nacimiento:
+          {{ trabajador.documentos.datos_personales.fechaNacimiento }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Dirección: {{ trabajador.documentos.datos_personales.direccion }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Nivel Educativo:
+          {{ trabajador.documentos.datos_personales.nivelEducativo }}
+        </li>
+        <li class="flex justify-center items-center text-sm text-gray-700">
+          Discapacidad física:
+          {{ trabajador.documentos.datos_personales.esDiscapacitado }}
+        </li>
+      </ul>
+
+      <div class="mt-6 w-full text-center">
+        <button
+          class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors"
+        >
+          Editar Perfil
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-2/4">
+      <!-- Tabs -->
+      <div class="flex border-b-2 border-gray-200 mb-5">
+        <a
+          (click)="showSection('profile')"
+          [class.border-blue-600]="activeSection === 'profile'"
+          class="px-5 py-2 text-blue-600 font-bold border-b-2 mr-4 cursor-pointer"
+          [class.border-transparent]="activeSection !== 'profile'"
+        >
+          Resumen
+        </a>
+        <a
+          (click)="showSection('documents')"
+          [class.border-blue-600]="activeSection === 'documents'"
+          class="px-5 py-2 text-blue-600 font-bold border-b-2 cursor-pointer"
+          [class.border-transparent]="activeSection !== 'documents'"
+        >
+          Documentos
+        </a>
+      </div>
+
+      <!-- Profile Details -->
+      <div
+        *ngIf="activeSection === 'profile'"
+        class="bg-white p-5 rounded-lg shadow-md"
+      >
+        <table class="w-4/5">
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold w-1/3">Cargo</td>
+            <td class="py-3">{{ trabajador.documentos.cargo.nombre }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Area</td>
+            <td class="py-3">{{ trabajador.documentos.cargo.area }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">División</td>
+            <td class="py-3">{{ trabajador.documentos.cargo.division }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Empresa</td>
+            <td class="py-3">{{ trabajador.documentos.cargo.empresa }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Supervisor</td>
+            <td class="py-3">{{ trabajador.documentos.cargo.supervisor }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Sueldo Base</td>
+            <td class="py-3">{{ trabajador.documentos.cargo.sueldoBase }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Tipo de Contrato</td>
+            <td class="py-3">{{ trabajador.documentos.contrato.tipo }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Jornada Laboral</td>
+            <td class="py-3">
+              {{ trabajador.documentos.contrato.jornadaLaboral }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Regimen Laboral</td>
+            <td class="py-3">
+              {{ trabajador.documentos.contrato.regimenLaboral }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Regimen Salud</td>
+            <td class="py-3">
+              {{ trabajador.documentos.seguros.regimenSalud }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Regimen Pensiones</td>
+            <td class="py-3">
+              {{ trabajador.documentos.seguros.regimenPensiones }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Fecha Incorporación</td>
+            <td class="py-3">
+              {{ trabajador.documentos.fechas.incorporacion }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Fecha Cese</td>
+            <td class="py-3">
+              {{ trabajador.documentos.fechas.cese || "No registra" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Es Sindicalizado</td>
+            <td class="py-3">
+              {{ trabajador.documentos.datos_personales.esSindicalizado }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Saldo Vacaciones</td>
+            <td class="py-3">
+              {{ trabajador.documentos.vacaciones.saldoVacaciones }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 font-bold">Días Tomados</td>
+            <td class="py-3">
+              {{ trabajador.documentos.vacaciones.diasTomados }}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Documents Section -->
+      <div
+        *ngIf="activeSection === 'documents'"
+        class="bg-white p-5 rounded-lg shadow-md"
+      >
+        <ul class="space-y-2">
+          <li
+            class="flex justify-between items-center py-3 border-b border-gray-200"
+          >
+            <span class="text-base text-gray-700">Contrato</span>
+            <div class="space-x-3"></div>
+          </li>
+          <li
+            class="flex justify-between items-center py-3 border-b border-gray-200"
+          >
+            <span class="text-base text-gray-700">Boletas de Pago</span>
+            <div class="space-x-3"></div>
+          </li>
+          <li
+            class="flex justify-between items-center py-3 border-b border-gray-200"
+          >
+            <span class="text-base text-gray-700">Certificado Médico</span>
+            <div class="space-x-3"></div>
+          </li>
+          <li
+            class="flex justify-between items-center py-3 border-b border-gray-200"
+          >
+            <span class="text-base text-gray-700">Políticas de la Empresa</span>
+            <div class="space-x-3"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
