@@ -12,6 +12,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthGuard {
   rol_valor: any;
+  id_user: any;
   constructor(private router: Router) {}
 
   canActivate: CanActivateFn = (
@@ -25,7 +26,7 @@ export class AuthGuard {
         try {
           const decodedToken = jwtDecode<any>(token);
           console.log('Decoded JWT:', decodedToken);
-
+          localStorage.setItem('id_user', decodedToken.user_id);
           this.rol_valor = decodedToken.rol;
         } catch (error) {
           console.error('Error al decodificar el token:', error);
@@ -49,7 +50,6 @@ export class AuthGuard {
       const tokenFromUrl = route.queryParamMap.get('token');
       console.log('Token recibido en la URL:', tokenFromUrl);
 
-      // Verifica si el token es válido antes de decodificar
       if (tokenFromUrl) {
         try {
           const decodedToken = jwtDecode<any>(tokenFromUrl);
@@ -57,9 +57,9 @@ export class AuthGuard {
 
           this.rol_valor = decodedToken.rol;
           localStorage.removeItem('token_trabajador');
-          // Almacenar el token en el localStorage
 
           localStorage.setItem('token_trabajador', tokenFromUrl);
+          localStorage.setItem('id_user', decodedToken.user_id);
           console.log('Token almacenado en localStorage como token_trabajador');
         } catch (error) {
           console.error('Error al decodificar el token:', error);
@@ -70,7 +70,6 @@ export class AuthGuard {
 
       const tokenInStorage = localStorage.getItem('token_trabajador');
 
-      // Permitir acceso si el token está en la URL o en el localStorage
       if (this.rol_valor == 'Trabajador') {
         if (tokenFromUrl || tokenInStorage) {
           return true;
@@ -83,12 +82,5 @@ export class AuthGuard {
         return false;
       }
     }
-
-    /* if (tokenFromUrl || tokenInStorage) {
-      return true;
-    } else {
-      this.router.navigate(['auth/login']);
-      return false;
-    } */
   };
 }

@@ -1,0 +1,34 @@
+
+CLASE CreatePermisosComponent
+    PROPIEDADES
+        permisoForm: Formulario
+
+    CONSTRUCTOR(formBuilder, permisoService)
+        INICIALIZAR formulario con:
+            fecha_solicitud = fecha actual (deshabilitado)
+            comenzando_en = vacío, requerido
+            terminando_en = vacío, requerido 
+            numero_horas = vacío, requerido, mínimo 1
+            motivo_solicitud = vacío, requerido, máximo 500 caracteres
+            id_area = 1
+            id_trabajador = 1
+
+    MÉTODO onSubmit()
+        SI formulario es válido ENTONCES
+            CREAR objeto formData con:
+                permiso = "Permiso de trabajo"
+                fecha_inicio = valor de comenzando_en
+                fecha_fin = valor de terminando_en
+                horas = número entero de numero_horas
+                motivo = valor de motivo_solicitud
+                id_area = valor de id_area
+                id_trabajador = valor de id_trabajador
+                jefe_inmediato = "Juan Pérez"
+
+            LLAMAR permisoService.crearPermiso(formData)
+                SI éxito ENTONCES
+                    Limpiar formulario
+                    Mantener fecha actual en fecha_solicitud
+                SI error ENTONCES
+                    Mostrar error en consola
+```

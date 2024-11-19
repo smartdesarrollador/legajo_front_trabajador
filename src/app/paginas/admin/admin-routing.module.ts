@@ -18,6 +18,12 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'gestion',
+    component: AdminComponent,
+    loadChildren: () =>
+      import('./gestion/gestion.module').then((m) => m.GestionModule),
+  },
+  {
     path: 'configuracion',
     component: AdminComponent,
     loadChildren: () =>

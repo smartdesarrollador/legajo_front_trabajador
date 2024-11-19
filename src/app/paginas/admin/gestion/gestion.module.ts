@@ -8,7 +8,9 @@ import { DescansosComponent } from './descansos/descansos.component';
 import { BoletasComponent } from './boletas/boletas.component';
 import { SancionesComponent } from './sanciones/sanciones.component';
 import { ReconocimientosComponent } from './reconocimientos/reconocimientos.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { CreatePermisosComponent } from './permisos/create-permisos/create-permisos.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,14 @@ import { ReconocimientosComponent } from './reconocimientos/reconocimientos.comp
     DescansosComponent,
     BoletasComponent,
     SancionesComponent,
-    ReconocimientosComponent
+    ReconocimientosComponent,
+    CreatePermisosComponent,
   ],
   imports: [
     CommonModule,
-    GestionRoutingModule
-  ]
+    GestionRoutingModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
 })
-export class GestionModule { }
+export class GestionModule {}
