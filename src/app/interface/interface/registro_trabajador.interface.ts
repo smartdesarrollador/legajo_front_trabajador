@@ -1,0 +1,44 @@
+export interface Trabajador {
+  id_trabajador: number; // Este es el único campo requerido
+  paterno?: string;
+  materno?: string;
+  primer?: string;
+  segundo?: string;
+  id_tipo_documento?: number;
+  numero_documento?: string;
+  fecha_nacimiento?: string;
+  ruc?: string;
+  direccion?: string;
+  referencia?: string;
+  id_ubigeo?: number;
+  telefono?: string;
+  celular?: string;
+  correo?: string;
+  id_empleador?: number;
+  id_regimen_laboral?: number;
+  id_ocupacion?: number;
+  id_tipo_contrato?: number;
+  id_cargo?: number;
+  id_area?: number;
+  es_jefe?: boolean;
+  id_jornada_laboral?: number;
+  id_estado_trabajador?: number;
+  fecha_estado?: string;
+  id_nivel_educativo?: number;
+  id_regimen_salud?: number;
+  id_regimen_pensiones?: number;
+  id_afp?: number;
+  cuspp?: string;
+  es_discapacitado?: boolean;
+  es_sindicalizado?: boolean;
+  fecha_ingreso?: string;
+  fecha_egreso?: string;
+  id_motivo_baja?: number;
+  fecha_baja?: string;
+  id_contrato?: number;
+  aprueba_solicitudes?: boolean;
+  saldo_inicial_vacaciones?: number;
+  id_user?: number;
+  created_at?: string;
+  updated_at?: string;
+}

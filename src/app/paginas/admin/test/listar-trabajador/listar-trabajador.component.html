@@ -1,0 +1,74 @@
+<!-- listar-trabajador.component.html -->
+<div class="trabajador-container">
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Cargando datos del trabajador...</p>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="error" class="error-message">
+    <span class="error-icon">hola</span>
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Trabajador data -->
+  <div *ngIf="trabajador && !loading" class="trabajador-data">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Información del Trabajador</h2>
+        <h3 class="card-subtitle">ID: {{ trabajador.id_trabajador }}</h3>
+      </div>
+
+      <div class="card-content">
+        <div class="info-grid">
+          <!-- Información personal -->
+          <section>
+            <h3>Datos Personales</h3>
+            <p><strong>Nombre completo:</strong> {{ getNombreCompleto() }}</p>
+            <p>
+              <strong>Documento:</strong>
+              {{ trabajador.numero_documento || "No especificado" }}
+            </p>
+            <p>
+              <strong>Fecha de nacimiento:</strong>
+              {{ trabajador.fecha_nacimiento }}
+            </p>
+          </section>
+
+          <!-- Información de contacto -->
+          <section>
+            <h3>Contacto</h3>
+            <p>
+              <strong>Teléfono:</strong>
+              {{ trabajador.telefono || "No especificado" }}
+            </p>
+            <p>
+              <strong>Celular:</strong>
+              {{ trabajador.celular || "No especificado" }}
+            </p>
+            <p>
+              <strong>Correo:</strong>
+              {{ trabajador.correo || "No especificado" }}
+            </p>
+          </section>
+
+          <!-- Información laboral -->
+          <section>
+            <h3>Información Laboral</h3>
+            <p>
+              <strong>Fecha de ingreso:</strong> {{ trabajador.fecha_ingreso }}
+            </p>
+            <p>
+              <strong>Es jefe:</strong> {{ trabajador.es_jefe ? "Sí" : "No" }}
+            </p>
+            <p>
+              <strong>Aprueba solicitudes:</strong>
+              {{ trabajador.aprueba_solicitudes ? "Sí" : "No" }}
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

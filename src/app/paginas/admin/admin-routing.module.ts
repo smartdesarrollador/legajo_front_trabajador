@@ -31,6 +31,11 @@ const routes: Routes = [
         (m) => m.ConfiguracionModule
       ),
   },
+  {
+    path: 'test',
+    component: AdminComponent,
+    loadChildren: () => import('./test/test.module').then((m) => m.TestModule),
+  },
 ];
 
 @NgModule({

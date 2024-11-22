@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PermisoService } from 'src/app/services/services/crear_permiso.service';
+/* import { Trabajador } from 'src/app/interface/interface/obtener_trabajador.interface'; */
+import { jwtDecode } from 'jwt-decode';
+import { Trabajador } from 'src/app/interface/interface/registro_trabajador.interface';
+import { RegistroTrabajadorServiceTsService } from 'src/app/services/services/registro-trabajador.service.ts.service';
 
 @Component({
   selector: 'app-create-permisos',
@@ -8,10 +12,22 @@ import { PermisoService } from 'src/app/services/services/crear_permiso.service'
   styleUrls: ['./create-permisos.component.css'],
 })
 export class CreatePermisosComponent implements OnInit {
+  token: any;
+  userData: any;
+  user_id: any;
   permisoForm: FormGroup;
-  id_trab: number = 1;
+  trabajador: Trabajador | null = null;
+  loading: boolean = true;
+  error: string | null = null;
+  id_trab: number = 0;
 
   constructor(private fb: FormBuilder, private permisoService: PermisoService) {
+    this.token = localStorage.getItem('token_trabajador');
+
+    this.userData = jwtDecode(this.token);
+
+    this.user_id = this.userData.user_id;
+
     this.permisoForm = this.fb.group({
       fecha_solicitud: [
         { value: new Date().toISOString().split('T')[0], disabled: true },
