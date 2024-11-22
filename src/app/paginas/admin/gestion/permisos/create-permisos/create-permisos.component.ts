@@ -20,6 +20,7 @@ export class CreatePermisosComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   id_trab: number = 0;
+  valor_id_trabajador: number | null = null;
 
   constructor(private fb: FormBuilder, private permisoService: PermisoService) {
     this.token = localStorage.getItem('token_trabajador');
@@ -27,6 +28,8 @@ export class CreatePermisosComponent implements OnInit {
     this.userData = jwtDecode(this.token);
 
     this.user_id = this.userData.user_id;
+
+    this.valor_id_trabajador = Number(localStorage.getItem('id_trabajador'));
 
     this.permisoForm = this.fb.group({
       fecha_solicitud: [
@@ -38,7 +41,7 @@ export class CreatePermisosComponent implements OnInit {
       motivo_solicitud: ['', [Validators.required, Validators.maxLength(500)]],
       // Agregar campos faltantes
       id_area: [1], // Valor por defecto o desde un selector
-      id_trabajador: [this.id_trab], // Valor por defecto o desde un selector
+      id_trabajador: [this.valor_id_trabajador], // Valor por defecto o desde un selector
     });
   }
 

@@ -6,6 +6,8 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { Trabajador } from 'src/app/interface/interface/registro_trabajador.interface';
+import { RegistroTrabajadorServiceTsService } from 'src/app/services/services/registro-trabajador.service.ts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,10 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthGuard {
   rol_valor: any;
   id_user: any;
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private trabajadorService: RegistroTrabajadorServiceTsService
+  ) {}
 
   canActivate: CanActivateFn = (
     route: ActivatedRouteSnapshot,
@@ -61,6 +66,18 @@ export class AuthGuard {
           localStorage.setItem('token_trabajador', tokenFromUrl);
           localStorage.setItem('id_user', decodedToken.user_id);
           console.log('Token almacenado en localStorage como token_trabajador');
+          this.trabajadorService
+            .getTrabajadorById(decodedToken.user_id)
+            .subscribe({
+              next: (trabajador) => {
+                // Guardar el token y el id_trabajador en localStorage
+
+                localStorage.setItem(
+                  'id_trabajador',
+                  trabajador.id_trabajador.toString()
+                );
+              },
+            });
         } catch (error) {
           console.error('Error al decodificar el token:', error);
           this.router.navigate(['auth/login']);
