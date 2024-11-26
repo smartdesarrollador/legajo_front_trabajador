@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
-import { jwtDecode } from 'jwt-decode';
+/* import { jwtDecode } from 'jwt-decode'; */
 
 @Injectable({
   providedIn: 'root',
@@ -35,9 +35,11 @@ export class TrabajadorService {
 
     this.token = localStorage.getItem('token_empresa');
 
-    this.userData = jwtDecode(this.token);
+    /* this.userData = jwtDecode(this.token);
 
-    this.userId = this.userData.user_id;
+    this.userId = this.userData.user_id; */
+
+    this.userId = Number(localStorage.getItem('id_trabajador'));
 
     if (this.userId) {
       params = params.set('user_id', this.userId.toString());
