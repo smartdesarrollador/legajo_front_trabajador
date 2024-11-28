@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Permiso } from 'src/app/interface/interface/permiso.interface';
 import { PermisosService } from 'src/app/services/services/permisos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-permisos',
@@ -15,7 +16,8 @@ export class PermisosComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private permisosService: PermisosService
+    private permisosService: PermisosService,
+    private router: Router
   ) {
     this.initForm();
   }
@@ -67,7 +69,7 @@ export class PermisosComponent implements OnInit {
   }
 
   solicitarPermiso(): void {
-    // Implementar navegación a la página de solicitud de permiso
+    this.router.navigate(['/admin/gestion/permiso/create']);
   }
 
   verAcuerdo(url: string): void {
