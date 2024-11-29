@@ -1,141 +1,147 @@
-<div class="container mx-auto max-w-4xl bg-white p-6 rounded-lg shadow-lg">
-  <h2 class="text-2xl font-bold mb-6 text-gray-800">Permisos</h2>
+<div class="grid grid-cols-1">
+  <div class="bg-white mr-14 mt-20 gap-y-14 p-10 rounded-[35px]">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Permisos</h2>
 
-  <div class="mb-8 bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-lg font-semibold mb-4 text-gray-700">
-      Búsqueda de Permisos:
-    </h3>
-    <!-- Corregido el [formGroup] -->
-    <form
-      [formGroup]="searchForm"
-      (ngSubmit)="consultarPermisos()"
-      class="space-y-4"
-    >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="flex flex-col">
-          <label
-            for="fecha_inicio"
-            class="text-sm font-medium text-gray-600 mb-1"
-            >Fecha desde:</label
-          >
-          <input
-            type="date"
-            id="fecha_inicio"
-            formControlName="fecha_inicio"
-            class="border rounded-md p-2"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="fecha_fin" class="text-sm font-medium text-gray-600 mb-1"
-            >Fecha hasta:</label
-          >
-          <input
-            type="date"
-            id="fecha_fin"
-            formControlName="fecha_fin"
-            class="border rounded-md p-2"
-          />
-        </div>
-      </div>
-      <div class="flex gap-4 mt-4">
-        <button
-          type="submit"
-          [disabled]="!searchForm.valid || loading"
-          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:opacity-50"
-        >
-          {{ loading ? "Consultando..." : "Consultar" }}
-        </button>
-        <button
-          type="button"
-          (click)="solicitarPermiso()"
-          class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-        >
-          Solicitar Permiso
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <div class="overflow-x-auto">
-    <table class="min-w-full bg-white border">
-      <thead class="bg-gray-50">
-        <tr>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Motivo
-          </th>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Fecha Inicio
-          </th>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Fecha Final
-          </th>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Horas
-          </th>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Estado
-          </th>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Ver Acuerdo
-          </th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <tr *ngFor="let permiso of permisos" class="hover:bg-gray-50">
-          <td class="px-6 py-4 whitespace-nowrap">{{ permiso.motivo }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            {{ permiso.fecha_inicio }}
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ permiso.fecha_final }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ permiso.horas }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span
-              class="h-3 w-3 rounded-full inline-block"
-              [ngClass]="{
-                'bg-green-500': permiso.estado.color === 'green',
-                'bg-red-500': permiso.estado.color === 'red'
-              }"
+    <div class="mb-8 bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700">
+        Búsqueda de Permisos:
+      </h3>
+      <!-- Corregido el [formGroup] -->
+      <form
+        [formGroup]="searchForm"
+        (ngSubmit)="consultarPermisos()"
+        class="space-y-4"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <label
+              for="fecha_inicio"
+              class="text-sm font-medium text-gray-600 mb-1"
+              >Fecha desde:</label
             >
-            </span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <a
-              *ngIf="permiso.ver_acuerdo.tiene_documento"
-              href="javascript:void(0)"
-              (click)="verAcuerdo(permiso.ver_acuerdo.url)"
-              class="text-blue-600 hover:text-blue-800"
+            <input
+              type="date"
+              id="fecha_inicio"
+              formControlName="fecha_inicio"
+              class="border rounded-md p-2"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="fecha_fin"
+              class="text-sm font-medium text-gray-600 mb-1"
+              >Fecha hasta:</label
             >
-              Ver
-            </a>
-          </td>
-        </tr>
+            <input
+              type="date"
+              id="fecha_fin"
+              formControlName="fecha_fin"
+              class="border rounded-md p-2"
+            />
+          </div>
+        </div>
+        <div class="flex gap-4 mt-4">
+          <button
+            type="submit"
+            [disabled]="!searchForm.valid || loading"
+            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:opacity-50"
+          >
+            {{ loading ? "Consultando..." : "Consultar" }}
+          </button>
+          <button
+            type="button"
+            (click)="solicitarPermiso()"
+            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+          >
+            Solicitar Permiso
+          </button>
+        </div>
+      </form>
+    </div>
 
-        <!-- Estado vacío -->
-        <tr *ngIf="permisos.length === 0 && !loading">
-          <td colspan="6" class="px-6 py-4 text-center text-gray-500">
-            No se encontraron permisos para el período seleccionado.
-          </td>
-        </tr>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Motivo
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Fecha Inicio
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Fecha Final
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Horas
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Estado
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Ver Acuerdo
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr *ngFor="let permiso of permisos" class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap">{{ permiso.motivo }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              {{ permiso.fecha_inicio }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              {{ permiso.fecha_final }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ permiso.horas }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="h-3 w-3 rounded-full inline-block"
+                [ngClass]="{
+                  'bg-green-500': permiso.estado.color === 'green',
+                  'bg-red-500': permiso.estado.color === 'red'
+                }"
+              >
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <a
+                *ngIf="permiso.ver_acuerdo.tiene_documento"
+                href="javascript:void(0)"
+                (click)="verAcuerdo(permiso.ver_acuerdo.url)"
+                class="text-blue-600 hover:text-blue-800"
+              >
+                Ver
+              </a>
+            </td>
+          </tr>
 
-        <!-- Estado de carga -->
-        <tr *ngIf="loading">
-          <td colspan="6" class="px-6 py-4 text-center text-gray-500">
-            Cargando permisos...
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <!-- Estado vacío -->
+          <tr *ngIf="permisos.length === 0 && !loading">
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+              No se encontraron permisos para el período seleccionado.
+            </td>
+          </tr>
+
+          <!-- Estado de carga -->
+          <tr *ngIf="loading">
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+              Cargando permisos...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
