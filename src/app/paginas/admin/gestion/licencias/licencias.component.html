@@ -1,1 +1,111 @@
-<p>licencias works!</p>
+<div class="grid grid-cols-1">
+  <div class="bg-white mr-14 mt-20 gap-y-14 p-10 rounded-[35px]">
+    <h2 class="text-[#FF7A00] text-2xl mb-5">Licencias</h2>
+
+    <!-- Formulario de búsqueda -->
+    <div class="bg-gray-50 p-5 rounded-lg shadow-md mb-5">
+      <h3 class="mb-4">Búsqueda de Licencias:</h3>
+      <form [formGroup]="formularioBusqueda" (ngSubmit)="consultarLicencias()">
+        <div class="space-y-4">
+          <div>
+            <label for="fechaDesde" class="font-bold mr-2">Fecha desde:</label>
+            <input
+              type="date"
+              id="fechaDesde"
+              formControlName="fechaDesde"
+              class="p-2 border rounded w-1/5 mb-4"
+            />
+          </div>
+
+          <div>
+            <label for="fechaHasta" class="font-bold mr-2">Fecha hasta:</label>
+            <input
+              type="date"
+              id="fechaHasta"
+              formControlName="fechaHasta"
+              class="p-2 border rounded w-1/5 mb-4"
+            />
+          </div>
+
+          <div class="flex justify-between mb-5">
+            <button
+              type="submit"
+              class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded text-base"
+              [disabled]="!formularioBusqueda.valid || loading"
+            >
+              {{ loading ? "Consultando..." : "Consultar" }}
+            </button>
+            <button
+              type="button"
+              (click)="solicitarLicencia()"
+              class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded text-base"
+            >
+              Solicitar Licencia
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Estado de carga -->
+    <div *ngIf="loading" class="text-center py-4">
+      <p>Cargando licencias...</p>
+    </div>
+
+    <!-- Mensaje si no hay datos -->
+    <div *ngIf="!loading && licencias.length === 0" class="text-center py-4">
+      <p>No se encontraron licencias para el período seleccionado.</p>
+    </div>
+
+    <!-- Tabla de licencias -->
+    <table
+      *ngIf="!loading && licencias.length > 0"
+      class="w-full border-collapse mb-5"
+    >
+      <thead>
+        <tr>
+          <th class="border border-gray-300 p-2.5 bg-gray-100">Motivo</th>
+          <th class="border border-gray-300 p-2.5 bg-gray-100">Fecha Inicio</th>
+          <th class="border border-gray-300 p-2.5 bg-gray-100">Fecha Final</th>
+          <th class="border border-gray-300 p-2.5 bg-gray-100">Dias</th>
+          <th class="border border-gray-300 p-2.5 bg-gray-100">Estado</th>
+          <th class="border border-gray-300 p-2.5 bg-gray-100">Ver Acuerdo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let licencia of licencias">
+          <td class="border border-gray-300 p-2.5 text-center">
+            {{ licencia.motivo }}
+          </td>
+          <td class="border border-gray-300 p-2.5 text-center">
+            {{ licencia.fecha_inicio }}
+          </td>
+          <td class="border border-gray-300 p-2.5 text-center">
+            {{ licencia.fecha_fin }}
+          </td>
+          <td class="border border-gray-300 p-2.5 text-center">
+            {{ licencia.dias }}
+          </td>
+          <td class="border border-gray-300 p-2.5 text-center">
+            <span
+              class="inline-block w-2.5 h-2.5 rounded-full"
+              [ngClass]="{
+                'bg-green-500': licencia.estado === 'aprobado',
+                'bg-red-500': licencia.estado === 'rechazado',
+                'bg-yellow-500': licencia.estado === 'pendiente'
+              }"
+            ></span>
+          </td>
+          <td class="border border-gray-300 p-2.5 text-center">
+            <a
+              [href]="licencia.ver_acuerdo"
+              target="_blank"
+              class="text-blue-600 hover:underline"
+              >Ver</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
