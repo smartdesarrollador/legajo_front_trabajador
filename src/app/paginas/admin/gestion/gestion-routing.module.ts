@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PermisosComponent } from './permisos/permisos.component';
 import { CreatePermisosComponent } from './permisos/create-permisos/create-permisos.component';
 import { LicenciasComponent } from './licencias/licencias.component';
+import { VacacionesComponent } from './vacaciones/vacaciones.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'licencia',
     component: LicenciasComponent,
+  },
+  {
+    path: 'vacaciones',
+    component: VacacionesComponent,
   },
 ];
 
