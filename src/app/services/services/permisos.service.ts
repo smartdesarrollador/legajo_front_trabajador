@@ -13,13 +13,17 @@ export class PermisosService {
   constructor(private http: HttpClient) {}
 
   consultarPermisos(
-    fechaDesde: string,
-    fechaHasta: string,
-    idUser: number
+    idUser: number,
+    fechaDesde?: string,
+    fechaHasta?: string
   ): Observable<Permiso[]> {
-    return this.http.get<Permiso[]>(
-      `${this.apiUrl}/consulta-permiso?fecha_desde=${fechaDesde}&fecha_hasta=${fechaHasta}&id_user=${idUser}`
-    );
+    let url = `${this.apiUrl}/consulta-permiso?id_user=${idUser}`;
+
+    if (fechaDesde && fechaHasta) {
+      url += `&fecha_desde=${fechaDesde}&fecha_hasta=${fechaHasta}`;
+    }
+
+    return this.http.get<Permiso[]>(url);
   }
 
   /* crearPermiso(formData: FormData): Observable<any> {

@@ -30,42 +30,28 @@ export class PermisosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const today = new Date();
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
-    this.searchForm.patchValue({
-      fecha_inicio: this.formatDate(firstDay),
-      fecha_fin: this.formatDate(lastDay),
-    });
-
     this.consultarPermisos();
   }
 
-  private formatDate(date: Date): string {
-    return date.toISOString().split('T')[0];
-  }
-
   consultarPermisos(): void {
-    if (this.searchForm.valid) {
-      this.loading = true;
-      const { fecha_inicio, fecha_fin } = this.searchForm.value;
-      const idUserInStorage = Number(localStorage.getItem('id_user'));
-      console.log(idUserInStorage);
-      const userId = idUserInStorage; // Este valor debería venir de tu servicio de autenticación
+    this.loading = true;
+    const idUserInStorage = Number(localStorage.getItem('id_user'));
+    const userId = idUserInStorage;
 
-      this.permisosService
-        .consultarPermisos(fecha_inicio, fecha_fin, userId)
-        .subscribe({
-          next: (permisos) => {
-            this.permisos = permisos;
-            this.loading = false;
-          },
-          error: () => {
-            this.loading = false;
-          },
-        });
-    }
+    const fechaInicio = this.searchForm.get('fecha_inicio')?.value;
+    const fechaFin = this.searchForm.get('fecha_fin')?.value;
+
+    this.permisosService
+      .consultarPermisos(userId, fechaInicio, fechaFin)
+      .subscribe({
+        next: (permisos) => {
+          this.permisos = permisos;
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+        },
+      });
   }
 
   solicitarPermiso(): void {
