@@ -12,10 +12,10 @@
             >
             <select
               id="tipo_vacaciones"
-              formControlName="tipo_vacaciones"
+              formControlName="id_tipo_vacaciones"
               class="w-full p-2 border rounded"
             >
-              <option value="">Seleccione un tipo</option>
+              <option value="">Todos los tipos</option>
               <option value="1">Vacaciones regulares</option>
               <option value="2">Adelanto de vacaciones</option>
               <option value="3">Acumulación de vacaciones</option>
@@ -48,7 +48,7 @@
 
           <button
             type="submit"
-            [disabled]="!vacacionesForm.valid || loading"
+            [disabled]="loading"
             class="bg-green-600 text-white px-4 py-2 rounded"
           >
             {{ loading ? "Consultando..." : "Consultar" }}
