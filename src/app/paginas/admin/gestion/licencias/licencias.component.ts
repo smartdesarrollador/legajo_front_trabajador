@@ -25,17 +25,26 @@ export class LicenciasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Inicializar con el mes actual
-    const hoy = new Date();
-    const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
-    const finMes = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0);
+    const idUserInStorage = localStorage.getItem('id_user');
+    if (idUserInStorage) {
+      const userId = Number(idUserInStorage);
+      this.consultarTodasLasLicencias(userId);
+    }
+  }
 
-    this.formularioBusqueda.patchValue({
-      fechaDesde: this.formatearFecha(inicioMes),
-      fechaHasta: this.formatearFecha(finMes),
+  consultarTodasLasLicencias(userId: number): void {
+    this.loading = true;
+    this.licenciaService.consultarLicencias(userId).subscribe({
+      next: (data) => {
+        console.log('Datos recibidos:', data);
+        this.licencias = data;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error al consultar licencias:', error);
+        this.loading = false;
+      },
     });
-
-    this.consultarLicencias();
   }
 
   consultarLicencias(): void {
@@ -50,28 +59,19 @@ export class LicenciasComponent implements OnInit {
       }
 
       const userId = Number(idUserInStorage);
-      console.log('Consultando licencias con parámetros:', {
-        fechaDesde,
-        fechaHasta,
-        userId,
-      });
 
       this.licenciaService
-        .consultarLicencias(fechaDesde, fechaHasta, userId)
+        .consultarLicencias(userId, fechaDesde, fechaHasta)
         .subscribe({
           next: (data) => {
-            console.log('Datos recibidos:', data);
             this.licencias = data;
             this.loading = false;
           },
           error: (error) => {
             console.error('Error al consultar licencias:', error);
             this.loading = false;
-            // Aquí podrías mostrar un mensaje de error al usuario
           },
         });
-    } else {
-      console.log('Formulario inválido:', this.formularioBusqueda.errors);
     }
   }
 

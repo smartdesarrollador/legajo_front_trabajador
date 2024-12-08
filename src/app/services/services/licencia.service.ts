@@ -13,14 +13,17 @@ export class LicenciaService {
   constructor(private http: HttpClient) {}
 
   consultarLicencias(
-    fechaDesde: string,
-    fechaHasta: string,
-    idUser: number
+    idUser: number,
+    fechaDesde?: string,
+    fechaHasta?: string
   ): Observable<ConsultaLicencia[]> {
-    const params = new HttpParams()
-      .set('fecha_desde', fechaDesde)
-      .set('fecha_hasta', fechaHasta)
-      .set('id_user', idUser.toString());
+    let params = new HttpParams().set('id_user', idUser.toString());
+
+    if (fechaDesde && fechaHasta) {
+      params = params
+        .set('fecha_desde', fechaDesde)
+        .set('fecha_hasta', fechaHasta);
+    }
 
     return this.http.get<ConsultaLicencia[]>(this.apiUrl, { params });
   }
