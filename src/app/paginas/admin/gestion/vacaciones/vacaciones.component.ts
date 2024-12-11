@@ -6,6 +6,7 @@ import {
   ControlVacaciones,
 } from 'src/app/interface/interface/consulta_vacaciones.interface';
 import { localStorageService } from 'src/app/services/services/localstorage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacaciones',
@@ -25,7 +26,8 @@ export class VacacionesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private vacacionesService: VacacionesService,
-    private localStorageService: localStorageService
+    private localStorageService: localStorageService,
+    private router: Router
   ) {
     this.vacacionesForm = this.fb.group({
       id_tipo_vacaciones: [''],
@@ -66,5 +68,6 @@ export class VacacionesComponent implements OnInit {
 
   solicitarVacaciones(): void {
     // Implementar navegación a formulario de solicitud
+    this.router.navigate(['/admin/gestion/vacaciones/solicitar-acumulacion']);
   }
 }

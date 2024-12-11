@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreatePermisosComponent } from './permisos/create-permisos/create-permisos.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { CrearLicenciaComponent } from './licencias/crear-licencia/crear-licencia.component';
+import { SolicitarAcumulacionVacacionesComponent } from './vacaciones/solicitar-acumulacion-vacaciones/solicitar-acumulacion-vacaciones.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CrearLicenciaComponent } from './licencias/crear-licencia/crear-licenci
     CreatePermisosComponent,
     VacacionesComponent,
     CrearLicenciaComponent,
+    SolicitarAcumulacionVacacionesComponent,
   ],
   imports: [
     CommonModule,

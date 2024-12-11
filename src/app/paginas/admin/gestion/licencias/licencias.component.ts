@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LicenciaService } from 'src/app/services/services/licencia.service';
 import { ConsultaLicencia } from 'src/app/interface/interface/consulta_licencia.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-licencias',
@@ -16,7 +17,8 @@ export class LicenciasComponent implements OnInit {
 
   constructor(
     private licenciaService: LicenciaService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.formularioBusqueda = this.fb.group({
       fechaDesde: ['', Validators.required],
@@ -81,6 +83,7 @@ export class LicenciasComponent implements OnInit {
 
   solicitarLicencia(): void {
     // Implementar la navegación a la página de solicitud de licencia
+    this.router.navigate(['/admin/gestion/licencia/create']);
     console.log('Navegando a solicitud de licencia...');
   }
 }

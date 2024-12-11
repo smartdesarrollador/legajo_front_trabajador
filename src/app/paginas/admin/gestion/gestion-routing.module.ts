@@ -5,6 +5,7 @@ import { CreatePermisosComponent } from './permisos/create-permisos/create-permi
 import { LicenciasComponent } from './licencias/licencias.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
 import { CrearLicenciaComponent } from './licencias/crear-licencia/crear-licencia.component';
+import { SolicitarAcumulacionVacacionesComponent } from './vacaciones/solicitar-acumulacion-vacaciones/solicitar-acumulacion-vacaciones.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'vacaciones',
     component: VacacionesComponent,
+  },
+  {
+    path: 'vacaciones/solicitar-acumulacion',
+    component: SolicitarAcumulacionVacacionesComponent,
   },
 ];
 
