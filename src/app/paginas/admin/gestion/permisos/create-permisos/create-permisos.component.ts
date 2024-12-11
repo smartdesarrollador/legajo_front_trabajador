@@ -5,6 +5,7 @@ import { PermisoService } from 'src/app/services/services/crear_permiso.service'
 import { jwtDecode } from 'jwt-decode';
 import { Trabajador } from 'src/app/interface/interface/registro_trabajador.interface';
 import { RegistroTrabajadorServiceTsService } from 'src/app/services/services/registro-trabajador.service.ts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-permisos',
@@ -22,7 +23,11 @@ export class CreatePermisosComponent implements OnInit {
   id_trab: number = 0;
   valor_id_trabajador: number | null = null;
 
-  constructor(private fb: FormBuilder, private permisoService: PermisoService) {
+  constructor(
+    private fb: FormBuilder,
+    private permisoService: PermisoService,
+    private router: Router
+  ) {
     this.token = localStorage.getItem('token_trabajador');
 
     this.userData = jwtDecode(this.token);
@@ -71,6 +76,7 @@ export class CreatePermisosComponent implements OnInit {
           this.permisoForm.reset({
             fecha_solicitud: new Date().toISOString().split('T')[0],
           });
+          this.router.navigate(['/admin/gestion/permiso']);
         },
         error: (error) => {
           console.error('Error al crear el permiso:', error);

@@ -57,7 +57,7 @@ export class SolicitarAcumulacionVacacionesComponent implements OnInit {
       this.solicitudService.solicitarAcumulacion(solicitud).subscribe({
         next: (response) => {
           console.log('Respuesta exitosa:', response);
-          this.router.navigate(['/vacaciones']);
+          this.router.navigate(['/admin/gestion/vacaciones']);
         },
         error: (error) => {
           console.error('Error detallado:', error);

@@ -71,7 +71,7 @@ export class CrearLicenciaComponent implements OnInit {
       this.crearLicenciaService.crearLicencia(licenciaData).subscribe({
         next: (response) => {
           console.log('Respuesta exitosa:', response);
-          this.router.navigate(['/licencias']);
+          this.router.navigate(['/admin/gestion/licencia']);
         },
         error: (error) => {
           console.error('Error completo:', error);
