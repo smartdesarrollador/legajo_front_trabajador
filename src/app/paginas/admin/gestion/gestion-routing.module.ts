@@ -4,6 +4,7 @@ import { PermisosComponent } from './permisos/permisos.component';
 import { CreatePermisosComponent } from './permisos/create-permisos/create-permisos.component';
 import { LicenciasComponent } from './licencias/licencias.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
+import { CrearLicenciaComponent } from './licencias/crear-licencia/crear-licencia.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'licencia',
     component: LicenciasComponent,
+  },
+  {
+    path: 'licencia/create',
+    component: CrearLicenciaComponent,
   },
   {
     path: 'vacaciones',

@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CreatePermisosComponent } from './permisos/create-permisos/create-permisos.component';
 import { VacacionesComponent } from './vacaciones/vacaciones.component';
+import { CrearLicenciaComponent } from './licencias/crear-licencia/crear-licencia.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { VacacionesComponent } from './vacaciones/vacaciones.component';
     ReconocimientosComponent,
     CreatePermisosComponent,
     VacacionesComponent,
+    CrearLicenciaComponent,
   ],
   imports: [
     CommonModule,
